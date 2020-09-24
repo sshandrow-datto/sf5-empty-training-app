@@ -51,3 +51,7 @@ services:
 
 #    App\Twig\LuckyNumberExtension:
 #        tags: ['twig.extension']
+
+    PDO:
+            class: 'PDO'
+            arguments: ['sqlite://var/www/var/data.db']
