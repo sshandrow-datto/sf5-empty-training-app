@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 47017d03bd59f320a72e945fef95867131c6f266
 # not a route - this imports another file
 #this_does_not_matter:
 #    resource: routes_api.yaml
