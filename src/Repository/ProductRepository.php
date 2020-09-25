@@ -7,13 +7,19 @@ use PDO;
 
 class ProductRepository
 {
+    private $pdo;
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
     public function findAll(): array
     {
-        $pdo = new PDO('sqlite:///var/www/var/data.db');
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $products = [];
-        $result = $pdo->query('SELECT * FROM product')->fetchAll();
+        $result = $this->pdo->query('SELECT * FROM product')->fetchAll();
         foreach ($result as $row) {
             $product = new Product();
             $product->setId($row['id']);

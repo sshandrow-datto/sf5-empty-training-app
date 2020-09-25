@@ -2,28 +2,36 @@
 
 namespace App\Controller;
 
+use App\Model\Product;
 use App\Repository\ProductRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
+use PDO;
 
 class ProductController extends AbstractController
 {
-    /** @var ProductRepository */
-    public $productRepo;
-
-    public function __construct(ProductRepository $productRepo)
+    /**
+     * @Route("/products")
+     */
+    public function list(ProductRepository $productRepository)
     {
-        $this->productRepo = $productRepo;
+        $products = $productRepository->findAll();
+
+        return $this->render('product/list.html.twig', [
+            'products' => $products,
+        ]);
     }
 
     /**
      * @Route("/api/products", methods={"GET"})
      */
-    public function getCollection(): array
+    public function getCollection(ProductRepository $productRepository)
     {
-        $products = $this->productRepo->findAll();
+        $products = $productRepository->findAll();
 
-        return $this->$products;
+        return $this->json($products);
+
+        //return new JsonResponse($products);
     }
 }
-
-// you should never see the word 'new' be a service. your service
-// should be in a service container

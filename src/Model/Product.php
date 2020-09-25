@@ -16,6 +16,8 @@ class Product
     /** @var string */
     private $description;
 
+    private $createdAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,5 +56,15 @@ class Product
     public function setDescription(string $description)
     {
         $this->description = $description;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 }
