@@ -35,6 +35,9 @@ class LuckyController extends AbstractController
     {
         # SS: Role Based Security Option 2: This does the same thing as access control
         # $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        # optionally you can render an error message. By default it is not exposed
+        # $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'You are not an admin');
+
 
         # SS: Sometimes you need to make decisions based on products
         # eg. If you are creator of an object, you can edit but no one else

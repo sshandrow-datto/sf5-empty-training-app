@@ -1,2 +1,13 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+
+    globals:
+        current_date: 'movie_fiday'
+        # SS: Yaml files are loaded by kernal
+        # these config are to help provide services to the container
+        # this is one of those files
+        # container - a collection of parameters and services
+        # when keys found in a yaml file other than param or services
+        #   looks for a bundle in services called eg. twig.bundle
+        #   looks for class in that bundle to pass services to
+        #   class is called <rootKey>Extension eg. SecurityExtension
