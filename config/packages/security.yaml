@@ -4,14 +4,24 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             id: App\Security\UserProvider
+    # SS notes:
+    # This is a case statement. The first one that matches is the one that is chosen
+    # keys that activate authentication systems go here
     firewalls:
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
-            lazy: true
-            provider: app_user_provider
+            # SS: give a guest badge if not recognized - they are considered anonymous - let authentication happen later
+            lazy: true # Don't check security until we run a security check. Symfony 4.4 feature
+            provider: app_user_provider # more about how the firewall should behave
+            guard:
+                authenticators:
+                    - App\Security\SimpleSSOAuthenticator
+            # SS: guard is a subcomponent that helps end users make auth listeners easily
+            # SS: You can have as many authenticators as you want
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

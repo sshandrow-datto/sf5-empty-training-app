@@ -8,6 +8,9 @@ class User implements UserInterface
 {
     private $email;
 
+    /** @var string */
+    private $name;
+
     private $roles = [];
 
     public function getEmail(): ?string
@@ -74,5 +77,21 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 }

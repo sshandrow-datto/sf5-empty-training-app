@@ -27,7 +27,10 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
         // The $username argument may not actually be a username:
         // it is whatever value is being returned by the getUsername()
         // method in your User class.
-        throw new \Exception('TODO: fill in loadUserByUsername() inside '.__FILE__);
+
+        // SS - overriding
+        return true;
+        //throw new \Exception('TODO: fill in loadUserByUsername() inside '.__FILE__);
     }
 
     /**
@@ -51,7 +54,9 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 
         // Return a User object after making sure its data is "fresh".
         // Or throw a UsernameNotFoundException if the user no longer exists.
-        throw new \Exception('TODO: fill in refreshUser() inside '.__FILE__);
+        //throw new \Exception('TODO: fill in refreshUser() inside '.__FILE__);
+        // SS: Overriding
+        return $user;
     }
 
     /**

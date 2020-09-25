@@ -2,11 +2,18 @@
 namespace App\Controller;
 
 use App\Service\LuckyNumberGenerator;
+use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * # method getUser(): User
+ * this is fake to let the framework know what is being returned
+ * You can make a baseController and shortcut methods in the base controller
+ */
 class LuckyController extends AbstractController
 {
     private $luckyNumberGenerator;
@@ -17,10 +24,16 @@ class LuckyController extends AbstractController
     }
 
     /**
-     * @Route("/lucky/number/{max<\d+>}", methods={"GET"})
+     * @Route("/lucky/number/{max<\d+>}", methods={"GET"}, name="app_lucky_number")
+     * @param $max
+     * @param LoggerInterface $logger
+     * @return Response
      */
     public function number($max, LoggerInterface $logger)
     {
+        // /** @var User $user */
+        // $user = $this->getUser();
+
         //$number = random_int($this->globalMinNumber, $max);
         //$generator = new LuckyNumberGenerator();
         $number = $this->luckyNumberGenerator->getRandomNumber($max);
@@ -45,7 +58,12 @@ class LuckyController extends AbstractController
 
     public function numberApi($max)
     {
-        $number = random_int(0, $max);
+        $number = 0;
+        try {
+            $number = random_int(0, $max);
+        } catch (Exception $e) {
+            #logger.log("Unexpected error");
+        }
 
         return new JsonResponse(['number' => $number]);
 
