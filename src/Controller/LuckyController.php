@@ -38,7 +38,6 @@ class LuckyController extends AbstractController
 
         # SS: Sometimes you need to make decisions based on products
         # eg. If you are creator of an object, you can edit but no one else
-        
 
         // /** @var User $user */
         // $user = $this->getUser();
@@ -46,6 +45,12 @@ class LuckyController extends AbstractController
         //$number = random_int($this->globalMinNumber, $max);
         //$generator = new LuckyNumberGenerator();
         $number = $this->luckyNumberGenerator->getRandomNumber($max);
+
+        // Should this person have access? VOTER SYSTEM
+        $this->denyAccessUnlessGranted('VIEW', $number);
+        # create a class, make sure it extends a certain interface
+        # and register service with symfony (automatically)
+        # user maker bundle to help with this `php bin/console make:voter`
 
         $logger->info(sprintf('Lucky number is "%d"', $number));
 
