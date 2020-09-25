@@ -36,6 +36,6 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         # SS: Currently we set everyone to have this role
         - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY } # This whitelists urls. The role is something everyone has no matter what
-        - { path: '^/lucky/number/', roles: ROLE_ADMIN } # Loss of role stops things dead in its track
+        - { path: '^/lucky/number', roles: ROLE_USER } # Loss of role stops things dead in its track
         - { path: '^/', roles: ROLE_USER } # Login is now required for login route. This requires logged in status for all routes
         # SS: Ensure the most specific is at the top because first match will be used

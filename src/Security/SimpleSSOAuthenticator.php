@@ -75,6 +75,7 @@ class SimpleSSOAuthenticator extends AbstractGuardAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
         $url = $this->router->generate('app_lucky_number', ['max' => 10]);
+        #$url = $this->router->generate('/lucky/number/{max</d>}', ['max' => 10]);
 
         return new RedirectResponse($url);
     }
@@ -82,7 +83,9 @@ class SimpleSSOAuthenticator extends AbstractGuardAuthenticator
 
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        // todo
+        $url = $this->router->generate('app_login');
+
+        return new RedirectResponse($url);
     }
 
     public function supportsRememberMe()

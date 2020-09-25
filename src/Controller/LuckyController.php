@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Service\LuckyNumberGenerator;
 use Exception;
 use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,12 +26,20 @@ class LuckyController extends AbstractController
 
     /**
      * @Route("/lucky/number/{max<\d+>}", methods={"GET"}, name="app_lucky_number")
+     * @ IsGranted("ROLE_ADMIN") # <-- Role Based Security Option 3: Done by an event listener
      * @param $max
      * @param LoggerInterface $logger
      * @return Response
      */
     public function number($max, LoggerInterface $logger)
     {
+        # SS: Role Based Security Option 2: This does the same thing as access control
+        # $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        # SS: Sometimes you need to make decisions based on products
+        # eg. If you are creator of an object, you can edit but no one else
+        
+
         // /** @var User $user */
         // $user = $this->getUser();
 
