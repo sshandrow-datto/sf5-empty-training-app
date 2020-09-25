@@ -52,4 +52,13 @@ class LoginController extends AbstractController
 
         dd($this->getUser());
     }
+
+
+    /**
+     * @Route("/logout", name="app_logout")
+     */
+    public function logout()
+    {
+        throw new \Exception('method should be intercepted by a listener');
+    }
 }
